@@ -25,7 +25,7 @@ if(posts.length ===0){
             </h1>
         </div>
     </div>
-    </Container>
+ </Container>
     </div>
  )   
 }

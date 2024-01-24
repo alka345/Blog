@@ -5,6 +5,7 @@ export class Service{
     client = new Client();
     databases;
     bucket;
+
     constructor(){
         this.client
         .setEndpoint(conf.appwriteUrl)
@@ -18,7 +19,8 @@ export class Service{
             return await this.databases.createDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,{
+                slug,
+                {
                     title,
                     content,
                     featuredImage,
@@ -35,7 +37,8 @@ export class Service{
             return await this.databases.updateDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
-                slug,{
+                slug,
+                {
                     title,
                     content,
                     featuredImage,
@@ -45,17 +48,18 @@ export class Service{
         } catch (error) {
          console.log("Appwrite service :: updatePost :: error", error);   
         }
-    }
-    async deletePost(slug){
+    }    async deletePost(slug){
         try {
-            return await this.databases.deleteDocument(
+                await this.databases.deleteDocument(
                 conf.appwriteDatabaseId,
                 conf.appwriteCollectionId,
                 slug
                       
-            )  
+            )
+            return true
+            
         } catch (error) {
-         console.log("Appwrite service :: createPost :: error", error);   
+         console.log("Appwrite service :: deletePost :: error", error);   
          return false;
         }
     }
@@ -73,7 +77,7 @@ export class Service{
         }
     }
 
-    async getPosts(queries = [Query.equal("status","Active")]){
+    async getPosts(queries = [Query.equal("status","active")]){
         try {
            return await this.databases.listDocuments(
             conf.appwriteDatabaseId,
@@ -82,7 +86,7 @@ export class Service{
             
            ) 
         } catch (error) {
-            console.log("Appwrite service :: getPost :: error", error);   
+            console.log("Appwrite service :: getPosts :: error", error);   
          return false; 
         }
     }
@@ -108,7 +112,7 @@ export class Service{
             conf.appwriteBucketId,
             fileId
         )
-        return true;
+        return true
       } catch (error) {
         console.log("Appwrite service :: deleteFile :: error", error);   
         return false;

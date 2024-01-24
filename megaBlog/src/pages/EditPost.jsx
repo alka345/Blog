@@ -10,10 +10,10 @@ function EditPost() {
     const navigate = useNavigate()
 
     useEffect(() => {
-if(slug) {
-    appwriteService.getPost(slug).then((post) =>{
-        if(post){
-            setPost(post)
+        if(slug) {
+            appwriteService.getPost(slug).then((post) =>{
+                if(post){
+                    setPost(post)
         }
     })
 }
